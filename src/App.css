@@ -1,0 +1,80 @@
+html {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  height: 90vh;
+  margin: 0;
+  padding: 0;
+}
+
+.TilesContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.Tile {
+  background-color: black;
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border: solid 1px gray;
+  font-weight: bold;
+}
+
+.TileRow {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+input,
+.InputContainer {
+  background-color: black;
+  color: white;
+  border-color: transparent;
+  width: 90vw;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+}
+
+input:focus {
+  outline: none !important;
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 transparent;
+  color: black;
+}
+
+.error {
+  top: 30vw;
+  position: fixed;
+  background-color: #f007;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  left: 0;
+}
+
+
+@media screen and (min-height: 600px) {
+  .Tile {
+    background-color: black;
+    width: 66px;
+    height: 66px;
+    margin:4px;
+  }
+}
