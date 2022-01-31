@@ -1,0 +1,57 @@
+@import "./../../globals";
+
+.UserProfilePage {
+  margin: 40px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Profile Options Start*/
+
+.ProfileOptions {
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+  justify-content: center;
+}
+
+.ProfileOption {
+  width: 100px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+  margin: 5px 3px;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: $bgLvl1Dark;
+    color: $buttonColorDark;
+    .OptionIcon {
+      color: $buttonColorDark;
+    }
+  }
+}
+
+.OptionIcon {
+  font-size: 30px;
+  color: $brightTextColorDark;
+}
+
+.ProfileOption.light {
+  .OptionIcon,
+  span {
+    color: $brightTextColorDark;
+  }
+
+  &:hover {
+    background-color: $bgLvl1Light;
+  }
+}
+
+/*Profile Options End*/

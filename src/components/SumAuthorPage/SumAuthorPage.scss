@@ -1,0 +1,209 @@
+.SumAuthorPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+/*Book Header Starts */
+
+.SumAuthorHeader {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.SumAuthorInfoTop {
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+}
+
+.SumAuthorInfo {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 20px;
+  height: 132px;
+  margin-right: 30px;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 12px;
+  text-align: center;
+
+  h2 {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    margin: 0;
+    font-size: 22px;
+  }
+}
+
+.SumAuthorPhoto {
+  margin-right: 30px;
+}
+
+.SumAuthorPhotoImg {
+  height: 200px;
+  border-radius: 10px;
+}
+
+.SumWikiContainer {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 5px 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 132px;
+  margin-top: 28px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.SumWiki {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  color: white;
+  border-radius: 10px;
+}
+
+.SumWikiImg {
+  border-radius: 50px;
+  height: 40px;
+  width: 40px;
+  margin: 0 5px;
+}
+
+.SumDetailContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  max-width: 1000px;
+  width: 90%;
+  min-width: 300px;
+  margin: auto;
+}
+
+.SumAuthorBookContainer {
+  width: 70%;
+}
+
+.SumAuthorBooks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: space-evenly;
+}
+
+.SumAuthorBook {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 12px;
+  font-family: "Inter", sans-serif;
+  border-radius: 10px;
+  margin-bottom: 5px;
+
+  &:hover {
+    transform: scale(1sum05);
+  }
+}
+
+.SumAuthorBookImg {
+  height: 150px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.SumLessonList {
+  padding: 0;
+  padding-left: 10px;
+}
+
+.SumLessonItem {
+  background: rgba(0, 0, 0, 0);
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.Sumlimited-width {
+  max-width: 400px;
+}
+
+@media screen and (max-width: 760px) {
+  .SumDetailContainer {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+  }
+
+  .SumAuthorBookContainer {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .SumOtherContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .SumAuthorInfo {
+    margin-right: 0;
+    margin-top: 0;
+    height: 130px;
+    width: calc(100% - 180px);
+    border-radius: 10px 0 0 10px;
+  }
+
+  .SumAuthorPhoto {
+    margin: 0;
+  }
+
+  .SumAuthorPhotoImg {
+    height: 170px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .SumAuthorHeader {
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    width: 95%;
+    margin: auto;
+  }
+
+  .SumWikiContainer {
+    flex-direction: row;
+    width: 100%;
+    margin-top: 5px;
+    margin: 5px 10px;
+  }
+
+  .SumAuthorInfoTop {
+    margin: 5px 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .SumWiki {
+    margin: 5px auto;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,98 @@
+.BookHeaderContainer {
+  width: 100%;
+  
+  .BookThumbnailContainer{
+    width: 100vw;
+    height: 160px;
+    opacity: 80%;
+    top: -20px;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(5px);
+
+  }
+
+  
+  .BookInfoContainer {
+    position: relative;
+    margin-top: -160px;
+    padding: 0 10px;
+
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    .BookHeaderCover {
+      height: 220px;
+      box-shadow: -2px -2px 10px #ffffff33;
+
+      & > img {
+        height: 220px;
+      }
+    }
+
+    
+    .BookAuthors {
+      background-color: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      width: 90%;
+      height: 55px;
+      margin: 5px auto;
+      padding: 10px 10px;
+      margin: auto;
+      justify-content: space-evenly;
+    }
+
+    .BookAuthor {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto;
+      color: white;
+      text-align: left;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    .BookAuthor.light {
+      color: rgb(43, 43, 43);
+    }
+
+    .BookAuthorImg {
+      border-radius: 50px;
+      height: 40px;
+      width: 40px;
+      margin-right: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .BookHeaderContainer {
+    
+    .BookThumbnailContainer{
+      height: 140px;
+    }
+    .BookInfoContainer {
+      margin-top: -140px;
+
+      .BookHeaderCover {
+        height: 150px;  
+        & > img {
+          height: 150px;
+        }
+      }
+
+    }
+  }
+
+}

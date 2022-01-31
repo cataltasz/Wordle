@@ -1,0 +1,41 @@
+.TagPage {
+  padding-top: 20px;
+}
+
+.TagResContainer {
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+}
+
+.TagBookContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;  
+  padding-top: 50px;
+}
+
+
+.TagBookWrapper {
+  background-color: #0003;
+  padding: 10px;
+  margin: 5px;
+  overflow-y: scroll;
+  max-height: 80vh;
+  align-items: center;
+  
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & >.TagBookHeader {
+    position:absolute;
+    z-index: 33;
+    background-color: black
+  }
+}

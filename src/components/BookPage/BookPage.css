@@ -1,0 +1,74 @@
+.BookPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+/* Summary Styles */
+.BookContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  max-width: 1200px;
+  width: 90%;
+  min-width: 300px;
+}
+.SummaryContainer {
+  width: 70%;
+  max-width: 900px;
+  margin-bottom: 30px;
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.SummaryContainer.light {
+  color: #333;
+}
+
+.SummaryContainer > div {
+  text-align: left;
+}
+
+.LessonList {
+  text-align: left;
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+
+.LessonItem {
+  background: rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding: 0 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media screen and (max-width: 760px) {
+  /* Body Container */
+  .BookContainer {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+  }
+
+  .SummaryContainer {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .OtherContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+}

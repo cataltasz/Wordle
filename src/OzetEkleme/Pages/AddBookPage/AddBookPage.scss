@@ -1,0 +1,20 @@
+.book-modal {
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-clip: "padding-box";
+    margin: 20px;
+  .info-container {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    &>div {
+      display: flex; 
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}

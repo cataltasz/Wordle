@@ -1,0 +1,30 @@
+.errorContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  height: 70vh;
+}
+
+.errorIcon {
+  text-align: center;
+  color: red;
+  font-size: 160px;
+  font-weight: 600;
+}
+
+.errorTitle {
+  text-align: center;
+  color: red;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.errorDesc {
+  color: white;
+  font-size: 12px;
+  font-weight: 300;
+}

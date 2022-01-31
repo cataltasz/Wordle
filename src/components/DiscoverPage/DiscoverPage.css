@@ -1,0 +1,8 @@
+.DiscoverPage {
+  font-family: "Inter", sans-serif;
+  padding-top: 20px;
+}
+
+.DiscoverPage.light {
+  color: #333;
+}

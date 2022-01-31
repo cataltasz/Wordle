@@ -1,0 +1,11 @@
+.CategoriesPage {
+  padding-top: 20px;
+}
+
+.CategoriesPage.light {
+  color: #333;
+}
+
+.CategoriesPage > h2 {
+  margin-top: 70px;
+}

@@ -1,0 +1,20 @@
+import { errorConstants } from "./strings";
+
+export function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
+export function validateUsername(username) {
+  return username.length >= 4;
+}
+
+export function validatePassword(password) {
+  return password.length >= 6;
+}
+
+export function getErrorMessage(error) {
+  // ONLY get title not exp.
+  error = error.split(":")[0].trim();
+  return errorConstants[error];
+}

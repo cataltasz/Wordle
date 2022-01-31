@@ -1,0 +1,149 @@
+@import "./../../../globals";
+
+
+.search-bar {
+  position: absolute;
+  width: 40%;
+  margin-bottom: 60px;
+  left: 50%;
+  margin-left: -20%;
+}
+
+.search-overlay {
+  display: none;
+}
+
+.search-bar.focused {
+  > .search-overlay {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    top: 40px;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(6px);
+  }
+
+  position: fixed;
+  z-index: 5;
+  top: 60px;
+}
+
+.search-container {
+  border-radius: 10px;
+  height: 30px;
+  padding: 5px 20px;
+  background: $backgroundDark;
+  z-index: 4;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px $lowTextColorDark;
+
+  &.light {
+    border: solid 1px $lowTextColorLight;
+
+    background: $backgroundLight;
+    color: #333;
+  }
+}
+
+.prompt {
+  &.light {
+    background: $backgroundLight;
+    color: $lowTextColorLight;
+  }
+
+  border-radius: 10px;
+  height: 30px;
+  width: 90%;
+  color: $buttonColorDark;
+  border-style: none;
+  background: $backgroundDark;
+}
+
+.search-container {
+  &:hover {
+    > .prompt {
+      background: $bgLvl1Dark;
+    }
+
+    background: $bgLvl1Dark;
+  }
+
+  &.light:hover {
+    > .prompt {
+      background: $bgLvl1Light;
+    }
+
+    background: $bgLvl1Light;
+  }
+}
+
+.prompt:focus {
+  outline: none;
+}
+
+.search-results {
+  &.closed {
+    display: none;
+  }
+  border: solid 1px $lowTextColorDark;
+  padding-top: 20px;
+  max-width: 700px;
+  background: $backgroundDark;
+  position: relative;
+  top: -20px;
+  margin: auto;
+  z-index: 3;
+  border-radius: 10px;
+
+  &.light {
+    border: solid 1px $lowTextColorLight;
+
+    background: $backgroundLight;
+    color: $lowTextColorLight;
+
+    .search-result {
+      padding: 15px;
+      color: $lowTextColorLight;
+      &:hover {
+        background-color: $bgLvl1Light;
+        color: $buttonColorLight;
+      }
+    }
+    
+  }
+
+  
+  .search-result {
+    padding: 15px;
+    border-bottom: 1px solid rgba(78, 78, 78, 0.993);
+
+    &:hover {
+      background-color: $bgLvl1Dark;
+      color: $buttonColorDark;
+    }
+  }
+}
+
+
+.search-icon {
+  font-size: 22px;
+  top: 6px;
+  margin-right: 10px;
+}
+
+.search-result:last-child {
+  border-bottom: none;
+}
+
+@media screen and (max-width: 760px) {
+  .search-bar {
+    width: 80%;
+    margin-left: -40%;
+  }
+}
