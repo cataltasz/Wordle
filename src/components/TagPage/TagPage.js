@@ -6,6 +6,9 @@ import Loading from "./../generic/Loading";
 //import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "./../generic/Card/Card";
 import TagHeader from "./TagHeader";
+import { Link } from "react-router-dom";
+import {AiOutlineArrowRight} from "react-icons/ai"
+
 let urlStart = "https://biozetapi.herokuapp.com/category?category_id=";
 
 export default function TagPage({ match }) {
@@ -22,12 +25,12 @@ export default function TagPage({ match }) {
         name: summary.book.name,
         url: "/ozet/" + summary.summary_id,
         author: summary.book.author.name,
-        img: summary.book.image_url
+        img: summary.book.image_url,
       };
     });
 
     if (books) {
-      setBooks(prev => [...prev, ...newBooks])
+      setBooks((prev) => [...prev, ...newBooks]);
     } else {
       //if (newBooks.length < 1) setMore(false);
       setBooks(newBooks);
@@ -40,7 +43,7 @@ export default function TagPage({ match }) {
         name: author.name,
         url: "/yazar/" + author.author_id,
         author: "",
-        img: author.image_url
+        img: author.image_url,
       };
     });
     setAuthors(newAuthors);
@@ -66,6 +69,8 @@ export default function TagPage({ match }) {
       .catch((e) => console.log(e));
   }, []);
 */
+
+  const openBooksModal = () => {};
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Bi'Özet: Kategori yükleniyor... ";
@@ -101,7 +106,7 @@ export default function TagPage({ match }) {
         {books && (
           <div className="TagBookWrapper">
             <div className="TagBookHeader">
-              <h2>Kitaplar</h2>
+              <h2>{data.name + " Kategorisindeki Kitaplar"}</h2>
             </div>
 
             <div className="TagBookContainer">
@@ -112,10 +117,17 @@ export default function TagPage({ match }) {
                   hasMore={more}
                   loader={<LoadingSmall />}
                 >*/}
-                  {books.map((book, i) => (
-                    <Card key={i} cardInfo={book} cardClass="Card big-card" />
-                  ))}
-                {/*</InfiniteScroll>
+              {books.map((book, i) => (
+                <Card key={i} cardInfo={book} cardClass="Card big-card" />
+              ))}
+
+              {!(books.length < count) && (
+                <div className="showAllButton" onClick={openBooksModal}>
+                  <span>Tümünü Gör</span>
+                  <AiOutlineArrowRight />
+                </div>
+              )}
+              {/*</InfiniteScroll>
                   </div>*/}
             </div>
           </div>
@@ -125,15 +137,23 @@ export default function TagPage({ match }) {
           <div className="TagBookWrapper">
             <div className="TagBookHeader">Yazarlar</div>
             <div className="TagBookContainer">
-              {authors.map((book, i) => (
-                /*<AuthorBook book={book} />*/
-                <Card key={i} cardInfo={book} cardClass="Card big-card" />
+              {authors.map((author, i) => (
+                <AuthorCard author={author} key={i} />
               ))}
             </div>
           </div>
         )}
       </div>
     </div>
+  );
+}
+
+function AuthorCard({ author }) {
+  return (
+    <Link className="AuthorCard" to={"/yazar/" + author.url}>
+      <img src={author.img} alt="Yazar Fotoğrafı" />
+      <span>{author.name}</span>
+    </Link>
   );
 }
 
@@ -148,7 +168,7 @@ function Failed() {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   };
   return <div style={style}> Böyle bir kategori olduğunu hiç sanmıyorum. </div>;
 }

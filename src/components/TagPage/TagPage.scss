@@ -1,5 +1,23 @@
 .TagPage {
   padding-top: 20px;
+
+  .AuthorCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    &:hover {
+      background-color: #0003;
+    }
+    & > img {
+      border-radius: 50px;
+      height: 50px;
+      width: 50px;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .TagResContainer {
@@ -7,18 +25,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-
 }
 
 .TagBookContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;  
+  justify-content: center;
   padding-top: 50px;
-}
 
+  .showAllButton {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+
+    &:hover {
+      background-color: #0003;
+    }
+  }
+}
 
 .TagBookWrapper {
   background-color: #0003;
@@ -27,15 +53,4 @@
   overflow-y: scroll;
   max-height: 80vh;
   align-items: center;
-  
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  & >.TagBookHeader {
-    position:absolute;
-    z-index: 33;
-    background-color: black
-  }
 }
