@@ -19,7 +19,6 @@ export default function Card({ cardInfo, cardClass }) {
           </div>
           <div className="card-info">
             <span className="card-text">
-              {" "}
               <b>{cardInfo.name} </b>
             </span>
             <span className="card-text"> {cardInfo.author} </span>

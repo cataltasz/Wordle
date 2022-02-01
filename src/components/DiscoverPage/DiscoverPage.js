@@ -17,7 +17,7 @@ const confBookData = (setter, response) => {
       return {
         name: summary.book.name,
         url: "/ozet/" + summary.summary_id,
-        author: summary.book.author.name,
+        author: summary.book.author.map(aut => aut.name).join("\n"),
         img: summary.book.image_url,
       };
     })
@@ -54,11 +54,14 @@ export default function DiscoverPage() {
     axios
       .get(urlStart + "sort=date&asc&count=10")
       .then((response) => {
+        console.log(response)
         confBookData(setLastData, response);
       })
       .catch((ex) => {
         setError(true);
       });
+
+      
 
     axios
       .get(urlStart + "sort=pop&asc&count=10")

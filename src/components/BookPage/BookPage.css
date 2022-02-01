@@ -42,13 +42,22 @@
   margin: 0; /* Remove margins */
 }
 
+
 .LessonItem {
   background: rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   padding: 0 4px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
+  text-align: left;
+  align-items: center;
+  font-style: italic;
+  font-weight: 100;
+}
+
+.LessonItemQuestion {
+  font-size: 40px;
 }
 
 @media screen and (max-width: 760px) {

@@ -62,30 +62,18 @@ export default function BookPage({ match }) {
       <BookHeader data={data} />
 
       <div className="BookContainer">
-        <article className={"SummaryContainer " + theme}>
-          <h3>Konu</h3>
-          <div>{data.content.topic}</div>
-        </article>
-
-        {data.content.lessons &&
-          data.content.lessons.map((lesson, i) => (
-            <article className={"SummaryContainer " + theme} key={i}>
-              <h3>{lesson.title}</h3>
-              <div>{lesson.body}</div>
-            </article>
-          ))}
         {data.content.questions && (
           <div className={"SummaryContainer " + theme}>
             <h4>Sorular</h4>
             <ul className="LessonList">
               {data.content.questions.map((question, i) => (
                 <li className="LessonItem" key={i}>
-                  <p>
+                  <span className="LessonItemQuestion">
                     <BsFillQuestionCircleFill
-                      style={{ color: "#ADFF45", margin: "0 5px" }}
+                      style={{ color: theme==="light"?"#2270a0" : "#51b8f7", margin: "0 5px" }}
                     />
-                  </p>
-                  <p>{question}</p>
+                  </span>
+                  <span>{question}</span>
                 </li>
               ))}
             </ul>
@@ -101,6 +89,18 @@ export default function BookPage({ match }) {
             {data.content.structure}
           </div>
         )}
+        <article className={"SummaryContainer " + theme}>
+          <h3>Konu</h3>
+          <div>{data.content.topic}</div>
+        </article>
+
+        {data.content.lessons &&
+          data.content.lessons.map((lesson, i) => (
+            <article className={"SummaryContainer " + theme} key={i}>
+              <h3>{lesson.title}</h3>
+              <div>{lesson.body}</div>
+            </article>
+          ))}
 
         {data.content.quotes && (
           <div
@@ -127,7 +127,7 @@ function Failed() {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   };
   return <div style={style}> Böyle bir kitap olduğunu hiç sanmıyorum. </div>;
 }
