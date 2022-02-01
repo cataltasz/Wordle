@@ -21,7 +21,7 @@
 }
 
 .TagResContainer {
-  padding-top: 70px;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,13 +32,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 50px;
 
   .showAllButton {
     display: flex;
     align-items: center;
     text-align: center;
     padding: 5px;
+    cursor: pointer;
 
     &:hover {
       background-color: #0003;
@@ -47,10 +47,8 @@
 }
 
 .TagBookWrapper {
-  background-color: #0003;
   padding: 10px;
   margin: 5px;
-  overflow-y: scroll;
-  max-height: 80vh;
+  overflow-y: hidden;
   align-items: center;
 }

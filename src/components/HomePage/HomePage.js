@@ -28,7 +28,7 @@ export default function HomePage() {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                marginTop: "10px"
+                marginTop: "10px",
               }}
             >
               <Link to="/giris" className="SignupBtnHome">

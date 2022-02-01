@@ -9,49 +9,49 @@ const books = [
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
+    author: "Adam Fawer",
   },
   {
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
+    author: "Adam Fawer",
   },
   {
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
+    author: "Adam Fawer",
   },
   {
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
+    author: "Adam Fawer",
   },
   {
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
+    author: "Adam Fawer",
   },
   {
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
+    author: "Adam Fawer",
   },
   {
     name: "Olasılıksız",
     img: "https://i.dr.com.tr/cache/500x400-0/originals/0001828654001-1.jpg",
     url: "/ozet/1",
-    author: "Adam Fawer"
-  }
+    author: "Adam Fawer",
+  },
 ];
 
 const quotes = [
   "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
-  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum"
+  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
 ];
 const tags = ["Roman", "Bilim Kurgu", "Gerilim"];
 const wikiAbout =

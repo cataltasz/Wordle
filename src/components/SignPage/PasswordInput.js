@@ -9,7 +9,7 @@ function PasswordInput({
   hidePassword,
   onChange,
   showPassword,
-  label
+  label,
 }) {
   return (
     <FormControl required fullWidth margin="normal">

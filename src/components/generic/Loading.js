@@ -34,7 +34,7 @@ export function LoadingSmall() {
     <Fade>
       <Loader
         type="Bars"
-        color="#ADFF45"
+        color="#2270a0"
         height={100}
         width={100}
         timeout={2000}

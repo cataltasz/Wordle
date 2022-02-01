@@ -21,7 +21,6 @@ export default function Navbar() {
     localStorage.setItem("DARK_MODE", theme);
   }, [theme]);
 
-
   const onLogout = () => {
     dispatch(changeAuth(""));
     localStorage.setItem("auth", "");
@@ -39,17 +38,11 @@ export default function Navbar() {
       </div>
 
       <div className={"Navbar-Links " + theme}>
-        <NavLink
-          to="/"
-          className={"NavLink clickable-gray-box " + theme}
-        >
+        <NavLink to="/" className={"NavLink clickable-gray-box " + theme}>
           <AiFillHome className="nav-link-icon" />
           <span>{navbarConstants.HOME}</span>
         </NavLink>
-        <NavLink
-          to="/kesfet"
-          className={"NavLink clickable-gray-box " + theme}
-        >
+        <NavLink to="/kesfet" className={"NavLink clickable-gray-box " + theme}>
           <RiCompassDiscoverFill className="nav-link-icon" />
           <span>{navbarConstants.DISCOVER}</span>
         </NavLink>
@@ -62,18 +55,12 @@ export default function Navbar() {
         </NavLink>
 
         {auth === "" ? (
-          <Link
-            to="/giris"
-            className={"NavLink clickable-gray-box " + theme}
-          >
+          <Link to="/giris" className={"NavLink clickable-gray-box " + theme}>
             <AiOutlineUser className="nav-link-icon" />
             <span>{navbarConstants.SIGN}</span>
           </Link>
         ) : (
-          <Link
-            to="/profil"
-            className={"NavLink clickable-gray-box " + theme}
-          >
+          <Link to="/profil" className={"NavLink clickable-gray-box " + theme}>
             <AiOutlineUser className="nav-link-icon" />
             <span>{navbarConstants.PROFILE}</span>
           </Link>

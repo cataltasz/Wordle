@@ -14,7 +14,6 @@ export default function BookHeader({ data }) {
     let date = new Date(data.date);
     return date.toLocaleDateString("tr-TR", options);
   };
-  console.log(data.book.author[0]);
 
   return (
     <header className="BookHeaderContainer">

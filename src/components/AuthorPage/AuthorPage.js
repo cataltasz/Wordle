@@ -9,7 +9,7 @@ import Error from "./../generic/error/Error";
 
 const quotes = [
   "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
-  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum"
+  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
 ];
 
 export default function AuthorPage({ match }) {
@@ -30,7 +30,6 @@ export default function AuthorPage({ match }) {
         { timeout: 5000 }
       )
       .then((response) => {
-        console.log(response.data.result);
         setData(response.data.result);
         if (response.data.result.author_id === null)
           setError("No author found");
@@ -72,7 +71,7 @@ export default function AuthorPage({ match }) {
           return {
             name: book.name,
             img: book.image_url,
-            url: "/ozet/" + book.summary_id
+            url: "/ozet/" + book.summary_id,
           };
         })}
       />
@@ -111,7 +110,7 @@ function AuthorBookContainer({ books }) {
             cardInfo={{
               name: book.name,
               img: book.image_url,
-              url: "/ozet/" + book.summary_id
+              url: "/ozet/" + book.summary_id,
             }}
             key={i}
           />

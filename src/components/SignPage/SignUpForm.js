@@ -15,7 +15,7 @@ import {
   validateEmail,
   validatePassword,
   validateUsername,
-  getErrorMessage
+  getErrorMessage,
 } from "./../../utils/validations";
 
 function SignUpForm({ classes, errorDispatch, hidePassword, showPassword }) {
@@ -51,14 +51,13 @@ function SignUpForm({ classes, errorDispatch, hidePassword, showPassword }) {
     e.preventDefault();
 
     const END_POINT_URL =
-      process.env.REACT_APP_SIGNUP_ENDPOINT + process.env.REACT_APP_FIREBASE_API_KEY;
-
-    console.log(END_POINT_URL);
+      process.env.REACT_APP_SIGNUP_ENDPOINT +
+      process.env.REACT_APP_FIREBASE_API_KEY;
 
     if (!isValid()) {
       errorDispatch({
         type: "OPEN",
-        payload: getErrorMessage("SIGNUP_INVALID")
+        payload: getErrorMessage("SIGNUP_INVALID"),
       });
       return;
     }
@@ -68,13 +67,13 @@ function SignUpForm({ classes, errorDispatch, hidePassword, showPassword }) {
       password: password,
       username: username,
       passwordConfirm: passwordConfirm,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
 
     fetch(END_POINT_URL, {
       method: "POST",
       body: JSON.stringify(newUserCredentials),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     }).then((res) => {
       if (res.ok) {
         // Everything is okay
@@ -92,7 +91,7 @@ function SignUpForm({ classes, errorDispatch, hidePassword, showPassword }) {
         res.json().then((data) => {
           errorDispatch({
             type: "OPEN",
-            payload: getErrorMessage(data.error.message)
+            payload: getErrorMessage(data.error.message),
           });
         });
       }

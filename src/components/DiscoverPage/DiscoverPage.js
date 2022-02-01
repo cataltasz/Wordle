@@ -18,7 +18,7 @@ const confBookData = (setter, response) => {
         name: summary.book.name,
         url: "/ozet/" + summary.summary_id,
         author: summary.book.author.name,
-        img: summary.book.image_url
+        img: summary.book.image_url,
       };
     })
   );
@@ -30,7 +30,7 @@ const confCatData = (setter, response) => {
       return {
         key: cat.category_id,
         name: cat.name,
-        url: "/kategori/" + cat.category_id
+        url: "/kategori/" + cat.category_id,
       };
     })
   );
@@ -54,7 +54,6 @@ export default function DiscoverPage() {
     axios
       .get(urlStart + "sort=date&asc&count=10")
       .then((response) => {
-        console.log(response);
         confBookData(setLastData, response);
       })
       .catch((ex) => {
@@ -73,7 +72,6 @@ export default function DiscoverPage() {
     axios
       .get(catUrl)
       .then((response) => {
-        console.log("data", response.data);
         confCatData(setCatData, response);
       })
       .catch((ex) => {

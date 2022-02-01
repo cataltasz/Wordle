@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const initialErrorState = {
   errorText: null,
-  errorOpen: false
+  errorOpen: false,
 };
 
 function errorReducer(state, action) {

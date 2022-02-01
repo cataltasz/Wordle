@@ -30,7 +30,6 @@ export default function BookPage({ match }) {
         { timeout: 5000 }
       )
       .then((response) => {
-        console.log(response.data.result);
         setData(response.data.result);
         if (response.data.result.summary_id === null) setFailed(true);
         setLoading(false);

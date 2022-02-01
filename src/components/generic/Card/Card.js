@@ -9,7 +9,6 @@ export default function Card({ cardInfo, cardClass }) {
             {cardInfo.img === null ? (
               <div className="card-info-placeholder">
                 <span className="card-text">
-                  {" "}
                   <b>{cardInfo.name} </b>
                 </span>
                 <span className="card-text"> {cardInfo.author} </span>

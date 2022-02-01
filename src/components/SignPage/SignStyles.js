@@ -1,4 +1,3 @@
-
 export const signStyles = (theme) => ({
   paper: {
     position: "relative",
@@ -11,25 +10,25 @@ export const signStyles = (theme) => ({
     boxShadow: "4px 4px 0 #ADFF45",
 
     "&:hover": {
-      boxShadow: "8px 8px 0 #ADFF45"
-    }
+      boxShadow: "8px 8px 0 #ADFF45",
+    },
   },
   avatar: {
     marginTop: 20,
     position: "relative",
     background: "rgba(0,0,0,0.2)",
     width: "100px",
-    height: "100px"
+    height: "100px",
   },
 
   icon: {
     width: "80px",
     height: "80px",
-    color: "rgba(173, 255, 69,0.79)"
+    color: "rgba(173, 255, 69,0.79)",
   },
 
   form: {
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
   },
   labels: {
     padding: `${theme.spacing(1)}px ${theme.spacing(4)}px`,
@@ -37,7 +36,7 @@ export const signStyles = (theme) => ({
     lineHeight: "5px",
     fontWeight: 300,
     opacity: 0.45,
-    color: `#ADFF45 !important`
+    color: `#ADFF45 !important`,
   },
 
   inputs: {
@@ -52,8 +51,8 @@ export const signStyles = (theme) => ({
     borderRadius: "10px",
 
     "&:hover": {
-      background: "rgba(41, 41, 41,0.36457423) "
-    }
+      background: "rgba(41, 41, 41,0.36457423) ",
+    },
   },
 
   button: {
@@ -76,20 +75,20 @@ export const signStyles = (theme) => ({
       bottom: 0,
       left: 0,
       right: 0,
-      opacity: 1
+      opacity: 1,
     },
 
     "&:hover": {
       background: "rgba(0,0,0,.1)",
       color: "#adff55",
       border: "1.4px solid",
-      borderColor: "#ADFF45"
-    }
+      borderColor: "#ADFF45",
+    },
   },
 
   passwordEye: {
     color: "#ADFF45",
-    opacity: 0.7
+    opacity: 0.7,
   },
 
   main: {
@@ -101,8 +100,8 @@ export const signStyles = (theme) => ({
     [theme.breakpoints.up(400 + theme.spacing(2))]: {
       width: 400,
       marginLeft: "auto",
-      marginRight: "auto"
-    }
+      marginRight: "auto",
+    },
   },
 
   header: {
@@ -110,20 +109,20 @@ export const signStyles = (theme) => ({
     padding: "10px 2px",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   headerItem: {
     padding: "10px 30px",
     borderRadius: "10px",
     "&:hover": {
-      boxShadow: "4px 4px 0 #ADFF45"
+      boxShadow: "4px 4px 0 #ADFF45",
     },
 
     "&.light": {
       color: "#333",
-      backgroundColor: "#4443"
-    }
+      backgroundColor: "#4443",
+    },
   },
 
   error: {
@@ -134,7 +133,7 @@ export const signStyles = (theme) => ({
     fontFamily: "Raleway, sans-serif",
     display: "flex",
     alignItems: "center",
-    paddingBottom: theme.spacing(3)
+    paddingBottom: theme.spacing(3),
   },
 
   headerItemActive: {
@@ -142,7 +141,7 @@ export const signStyles = (theme) => ({
     padding: "12px 35px",
 
     "&.light": {
-      backgroundColor: "#4441"
-    }
-  }
+      backgroundColor: "#4441",
+    },
+  },
 });

@@ -11,7 +11,7 @@ import Wrapper from "./Wrapper";
 import {
   validateEmail,
   validatePassword,
-  getErrorMessage
+  getErrorMessage,
 } from "./../../utils/validations";
 
 import { useHistory } from "react-router-dom";
@@ -39,16 +39,16 @@ function LoginForm({ classes, errorDispatch, hidePassword, showPassword }) {
     e.preventDefault();
     const userCredentials = {
       email: email,
-      password: password
+      password: password,
     };
 
     const END_POINT_URL =
-      process.env.REACT_APP_LOGIN_ENDPOINT + process.env.REACT_APP_FIREBASE_API_KEY;
-    console.log(END_POINT_URL)
+      process.env.REACT_APP_LOGIN_ENDPOINT +
+      process.env.REACT_APP_FIREBASE_API_KEY;
     fetch(END_POINT_URL, {
       method: "POST",
       body: JSON.stringify(userCredentials),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
@@ -61,7 +61,7 @@ function LoginForm({ classes, errorDispatch, hidePassword, showPassword }) {
           console.log(data.error.message);
           errorDispatch({
             type: "OPEN",
-            payload: getErrorMessage(data.error.message)
+            payload: getErrorMessage(data.error.message),
           });
         });
       }

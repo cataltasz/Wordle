@@ -14,9 +14,15 @@ export default function TagHeader({ data }) {
       <div className="TagThumbnailOverlay" />
 
       <div className="TagInfoContainer">
-        <div className="TagHeaderCover">
-          <img className="TagHeaderCoverImg" src={data.cover_img} alt="cover" />
-        </div>
+        {data.cover_img && (
+          <div className="TagHeaderCover">
+            <img
+              className="TagHeaderCoverImg"
+              src={data.cover_img}
+              alt="cover"
+            />
+          </div>
+        )}
         <div className={"TagHeaderInfo " + theme}>
           <h1>{data.name}</h1>
         </div>
