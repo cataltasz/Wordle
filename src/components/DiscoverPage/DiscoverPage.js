@@ -1,13 +1,18 @@
 import "./DiscoverPage.css";
 import SearchBar from "./../generic/SearchBar/SearchBar";
 import CardSlider from "./../generic/CardSlider/CardSlider";
+import Card from "./../generic/Card/Card";
+
 import CategoryContainer from "./../generic/CategoryContainer/CategoryContainer";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Loading from "./../generic/Loading";
+import Loading, { LoadingSmall } from "./../generic/Loading";
 import Error from "./../generic/error/Error";
 import { useSelector } from "react-redux";
 import Fade from "react-reveal/Fade";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import useFetchMore from "./../../utils/useFetchMore";
 
 let urlStart = "https://biozetapi.herokuapp.com/summary?";
 
@@ -17,11 +22,23 @@ const confBookData = (setter, response) => {
       return {
         name: summary.book.name,
         url: "/ozet/" + summary.summary_id,
-        author: summary.book.author.map(aut => aut.name).join("\n"),
-        img: summary.book.image_url,
+        author: summary.book.author.map((aut) => aut.name).join("\n"),
+        img: `https://covers.openlibrary.org/b/isbn/${summary.book.isbn}-L.jpg`,
       };
     })
   );
+};
+
+const confMoreBooks = (response) => {
+  console.log(response);
+  return response.data.result.map((summary) => {
+    return {
+      name: summary.book.name,
+      url: "/ozet/" + summary.summary_id,
+      author: summary.book.author.map((aut) => aut.name).join("\n"),
+      img: summary.book.image_url,
+    };
+  });
 };
 
 const confCatData = (setter, response) => {
@@ -47,6 +64,11 @@ export default function DiscoverPage() {
 
   const [error, setError] = useState(false);
 
+  const [fetchMoreBooks, books, more] = useFetchMore(
+    urlStart + "sort=date&asc",
+    3,
+    confMoreBooks
+  );
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Bi'Özet: Keşfet";
@@ -54,14 +76,12 @@ export default function DiscoverPage() {
     axios
       .get(urlStart + "sort=date&asc&count=10")
       .then((response) => {
-        console.log(response)
+        console.log(response);
         confBookData(setLastData, response);
       })
       .catch((ex) => {
         setError(true);
       });
-
-      
 
     axios
       .get(urlStart + "sort=pop&asc&count=10")
@@ -108,6 +128,23 @@ export default function DiscoverPage() {
         <h2>Kategoriler</h2>
         <CategoryContainer categories={catData} catClass="category-card" />
       </Fade>
+
+      <div style={{ marginTop: "30px" }}>
+        <h2>Sonsuz Özet Arşivi</h2>
+        <InfiniteScroll
+          className="TagBookContainer"
+          dataLength={books.length}
+          next={fetchMoreBooks}
+          hasMore={more}
+          loader={<LoadingSmall />}
+        >
+          {books.map((book, i) => (
+            <Fade>
+              <Card key={i} cardInfo={book} cardClass="Card big-card" />
+            </Fade>
+          ))}
+        </InfiniteScroll>
+      </div>
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function AuthorHeader({ data, wiki }) {
         </div>
 
         <div className="AuthorPhoto">
-          <img className="AuthorPhotoImg" src={data.image_url} alt="cover" />
+          <img className="AuthorPhotoImg" src={`https://covers.openlibrary.org/a/olid/${data.olid}-L.jpg`} alt="cover" />
         </div>
       </div>
 

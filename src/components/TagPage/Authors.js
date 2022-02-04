@@ -1,49 +1,29 @@
-import axios from "axios";
-import { useCallback, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
+import useFetchMore from "../../utils/useFetchMore";
 import { LoadingSmall } from "../generic/Loading";
+
 let urlStart = "https://biozetapi.herokuapp.com/category?category_id=";
 
+const confMoreAuthors = (response) => {
+  return response.data.result.authors.map((author) => {
+    return {
+      name: author.name,
+      url: "/yazar/" + author.author_id,
+      author: "",
+      img: author.image_url,
+    };
+  });
+};
 export default function Authors({ oldAuthors, name, id }) {
-  const [authors, setAuthors] = useState(oldAuthors);
-  const [more, setMore] = useState(true);
   const count = 10;
 
-  const fetchMoreAuthors = useCallback(() => {
-    let offset = 0;
-    if (authors) offset = authors.length;
-    axios
-      .get(
-        urlStart +
-          id +
-          "&sort=date&asc&count=" +
-          count +
-          "&offset=" +
-          offset +
-          "&type=authors"
-      )
-      .then((response) => {
-        console.log(response.data)
-        let newAuthors = response.data.result.authors.map((author) => {
-          return {
-            name: author.name,
-            url: "/yazar/" + author.author_id,
-            author: "",
-            img: author.image_url,
-          };
-        });
-
-        if (newAuthors.length % count !== 0) setMore(false);
-
-        if (authors) {
-          setAuthors((prev) => [...prev, ...newAuthors]);
-        } else {
-          setAuthors(newAuthors);
-        }
-      })
-      .catch((e) => console.log(e));
-  }, []);
+  const [fetchMoreAuthors, authors, more] = useFetchMore(
+    urlStart + id + "&type=authors&sort=date&asc",
+    count,
+    confMoreAuthors,
+    oldAuthors
+  );
 
   return (
     <div className="TagBookWrapper">

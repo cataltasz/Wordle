@@ -7,7 +7,7 @@ import SumAuthorPage from "./components/SumAuthorPage/SumAuthorPage";
 import HomePage from "./components/HomePage/HomePage";
 import SignPage from "./components/SignPage/SignPage";
 import DiscoverPage from "./components/DiscoverPage/DiscoverPage";
-import TagPage from "./components/TagPage/TagPage";
+import TagRouter from "./components/TagPage/TagRouter";
 import CategoriesPage from "./components/CategoriesPage/CategoriesPage";
 import UserProfilePage from "./components/UserProfilePage/UserProfilePage";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 export default function App() {
@@ -55,7 +55,7 @@ export default function App() {
             )}
 
             <Route path="/ozet/:ozetId" component={BookPage} />
-            <Route path="/kategori/:tagName" component={TagPage} />
+            <Route path="/kategori/:tagName" component={TagRouter} />
             <Route path="/yazar/:yazarId" component={AuthorPage} />
             <Route path="/ozet-yazar/:yazarId" component={SumAuthorPage} />
             <Route render={() => <Redirect to="/" />} />

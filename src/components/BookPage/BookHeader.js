@@ -4,7 +4,7 @@ import "./BookHeader.scss";
 
 export default function BookHeader({ data }) {
   const theme = useSelector((state) => state.theme.value);
-
+console.log(`url('https://covers.openlibrary.org/b/isbn/${data.book.isbn}-L.jpg')`)
   const getDate = () => {
     const options = {
       year: "numeric",
@@ -19,7 +19,7 @@ export default function BookHeader({ data }) {
     <header className="BookHeaderContainer">
       <div
         className="BookThumbnailContainer"
-        style={{ backgroundImage: `url('${data.book.image_url}')` }}
+        style={{ backgroundImage: `url('https://covers.openlibrary.org/b/isbn/${data.book.isbn}-L.jpg')` }}
       />
 
       <div className="BookThumbnailOverlay" />
@@ -28,7 +28,7 @@ export default function BookHeader({ data }) {
         <div className="BookHeaderCover">
           <img
             className="BookHeaderCoverImg"
-            src={data.book.image_url}
+            src={`https://covers.openlibrary.org/b/isbn/${data.book.isbn}-L.jpg`}
             alt="cover"
           />
         </div>
@@ -47,7 +47,7 @@ export default function BookHeader({ data }) {
               <div className={"BookAuthor clickable-gray-box " + theme}>
                 <img
                   className="BookAuthorImg"
-                  src={author.image_url}
+                  src={`https://covers.openlibrary.org/a/olid/${author.olid}-L.jpg`}
                   alt="cover"
                 />
                 <span>

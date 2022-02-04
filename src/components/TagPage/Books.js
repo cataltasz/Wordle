@@ -1,48 +1,31 @@
-import axios from "axios";
-import { useCallback, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../generic/Card/Card";
 import { LoadingSmall } from "../generic/Loading";
+
+import useFetchMore from "./../../utils/useFetchMore";
+
 let urlStart = "https://biozetapi.herokuapp.com/category?category_id=";
 
+const confMoreBooks = (response) => {
+  return response.data.result.summaries.map((summary) => {
+    return {
+      name: summary.book.name,
+      url: "/ozet/" + summary.summary_id,
+      author: summary.book.author.map((au) => au.name).join("\n"),
+      img: summary.book.image_url,
+    };
+  });
+};
+
 export default function Books({ oldBooks, name, id }) {
-  const [books, setBooks] = useState(oldBooks);
-  const [more, setMore] = useState(true);
   const count = 10;
 
-  const fetchMoreBooks = useCallback(() => {
-    let offset = 0;
-    if (books) offset = books.length;
-    axios
-      .get(
-        urlStart +
-          id +
-          "&sort=date&asc&count=" +
-          count +
-          "&offset=" +
-          offset +
-          "&type=summaries"
-      )
-      .then((response) => {
-        let newBooks = response.data.result.summaries.map((summary) => {
-          return {
-            name: summary.book.name,
-            url: "/ozet/" + summary.summary_id,
-            author: summary.book.author.map((au) => au.name).join("\n"),
-            img: summary.book.image_url,
-          };
-        });
-
-        if (newBooks.length % count !== 0) setMore(false);
-
-        if (books) {
-          setBooks((prev) => [...prev, ...newBooks]);
-        } else {
-          setBooks(newBooks);
-        }
-      })
-      .catch((e) => console.log(e));
-  }, []);
+  const [fetchMoreBooks, books, more] = useFetchMore(
+    urlStart + id + "&type=summaries&sort=date&asc",
+    count,
+    confMoreBooks,
+    oldBooks
+  );
 
   return (
     <div className="TagBookWrapper">
