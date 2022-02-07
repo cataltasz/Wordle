@@ -32,6 +32,7 @@ html {
   align-items: center;
   border: solid 1px gray;
   font-weight: bold;
+  font-size: 30px;
 }
 
 .TileRow {

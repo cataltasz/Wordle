@@ -1,96 +1,147 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
+import allWords from "./words";
+import { toLowerCase, findAll, intersection, trChars } from "./utils";
+import TilesContainer from "./TilesContainer";
+
 export default function App() {
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
-  const [word, setWord] = useState("erica");
+  const [word, setWord] = useState(
+    allWords[Math.floor(Math.random() * allWords.length)]
+  );
   const [error, setError] = useState(null);
   const [finished, setFinished] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef();
+
   const [predictions, setPredictions] = useState([
     [
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" }
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
     ],
     [
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" }
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
     ],
     [
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" }
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
     ],
     [
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" }
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
     ],
     [
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" }
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
     ],
     [
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" },
-      { val: "", color: "black1" }
-    ]
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+      { val: "", color: "black" },
+    ],
   ]);
 
-  const getWord = () => {
-    fetch("https://random-word-api.herokuapp.com/word?number=10").then(
-      (res) => {
-        res.json().then((data) => {
-          let found = false;
-          for (let w in data) {
-            if (data[w].length === 5) {
-              setWord(data[w]);
-              found = true;
-              break;
+  const onKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      // enter pressed
+      if (col === 5 && row < 6) {
+        let copy = [...predictions];
+        let guessWord = predictions[row].map((e) => e.val).join("");
+
+        if (guessWord === word) {
+          setFinished(true);
+        }
+
+        if (!allWords.includes(guessWord)) {
+          setError(
+            predictions[row].map((e) => e.val).join("") + " diye kelime olmaz!"
+          );
+          setCol(0);
+          copy[row] = [
+            { val: "", color: "black" },
+            { val: "", color: "black" },
+            { val: "", color: "black" },
+            { val: "", color: "black" },
+            { val: "", color: "black" },
+          ];
+          setPredictions(copy);
+          setLoading(false);
+          return;
+        }
+
+        let letter_indices_word, letter_indices_guess;
+        for (let i = 0; i < copy[row].length; i++) {
+          letter_indices_word = Array.from(findAll(word, guessWord[i]));
+          letter_indices_guess = Array.from(findAll(guessWord, guessWord[i]));
+
+          let same = intersection(letter_indices_word, letter_indices_guess);
+
+          for (let idx = 0; idx < same.length; idx++) {
+            copy[row][same[idx]].color = "green";
+          }
+
+          if (letter_indices_word.length > same.length) {
+            for (let idx = 0; idx < letter_indices_guess.length; idx++) {
+              if (!same.includes(letter_indices_guess[idx])) {
+                copy[row][idx].color = "#cca700";
+              }
             }
           }
-          if (!found) getWord();
-          else {
-            setLoading(false);
+        }
 
-            inputRef.current.focus();
-          }
-        });
+        setPredictions(copy);
+
+        if (row === 5) {
+          setFinished(true);
+        }
+        setRow(row + 1);
+        setCol(0);
       }
-    );
+    } else if (e.keyCode === 8) {
+      // backspace pressed
+      if (col > 0 && !finished) {
+        let copy = [...predictions];
+        copy[row][col - 1].val = "";
+        setPredictions(copy);
+        setCol((prev) => prev - 1);
+      }
+    }
   };
-  useEffect(() => {
-    getWord();
-  }, []);
 
   const onInputChange = async function (e) {
     if (finished || loading) {
       e.target.value = "";
     }
     setError(null);
+
     if (
       !(
         (e.target.value.charCodeAt(0) >= 65 &&
           e.target.value.charCodeAt(0) <= 90) ||
         (e.target.value.charCodeAt(0) >= 97 &&
-          e.target.value.charCodeAt(0) <= 122)
-      )
+          e.target.value.charCodeAt(0) <= 122) ||
+        trChars.includes(e.target.value[0])
+      ) ||
+      col > 4
     ) {
       e.target.value = "";
       return;
@@ -99,58 +150,13 @@ export default function App() {
     setLoading(true);
 
     //setError(null);
-    setPredictions(predictions);
+    //setPredictions(predictions);
     let copy = [...predictions];
-    copy[row][col].val = e.target.value[0].toLowerCase();
+    copy[row][col].val = toLowerCase(e.target.value)[0];
     setPredictions(copy);
     e.target.value = "";
 
-    if (col === 4) {
-      try {
-        let res = await fetch(
-          "https://api.dictionaryapi.dev/api/v2/entries/en/" +
-            predictions[row].map((e) => e.val).join("")
-        );
-
-        let data = await res.json();
-        let dummy = data[0].word;
-      } catch (e) {
-        setError(
-          predictions[row].map((e) => e.val).join("") + " diye kelime olmaz!"
-        );
-        setCol(0);
-        copy[row] = [
-          { val: "", color: "black1" },
-          { val: "", color: "black1" },
-          { val: "", color: "black1" },
-          { val: "", color: "black1" },
-          { val: "", color: "black1" }
-        ];
-        setPredictions(copy);
-        setLoading(false);
-        return;
-      }
-
-      for (let i = 0; i < copy[row].length; i++) {
-        let color = "black";
-        if (word.includes(copy[row][i].val)) {
-          color = "#cca700";
-          if (word.indexOf(copy[row][i].val) === i) color = "green";
-        }
-
-        copy[row][i].color = color;
-      }
-
-      if (predictions[row].map((e) => e.val).join("") === word) {
-        setFinished(true);
-      }
-
-      if (row === 5) {
-        setFinished(true);
-      }
-      setRow(row + 1);
-    }
-    setCol((col + 1) % 5);
+    setCol(col + 1);
     setLoading(false);
   };
 
@@ -172,20 +178,16 @@ export default function App() {
           <h3>{error}</h3>
         </div>
       )}
-      <div className="TilesContainer">
-        {predictions.map((prediction) => (
-          <div className="TileRow">
-            {prediction.map((letter) => (
-              <div className="Tile" style={{ backgroundColor: letter.color }}>
-                <p>{letter.val.toUpperCase()}</p>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      <TilesContainer predictions={predictions} />
 
       <div className="InputContainer">
-        <input ref={inputRef} autoFocus type="text" onChange={onInputChange} />
+        <input
+          ref={inputRef}
+          autoFocus
+          type="text"
+          onChange={onInputChange}
+          onKeyUp={onKeyUp}
+        />
       </div>
     </div>
   );
