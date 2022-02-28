@@ -40,7 +40,7 @@ export default function ItemAddableField(props) {
                   <Field
                     multiline
                     fullWidth
-                    name={`${name}.text`}
+                    name={`${name}.body`}
                     component={TextField}
                     placeholder="Ders İçeriği"
                   />
