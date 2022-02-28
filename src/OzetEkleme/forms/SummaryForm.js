@@ -5,13 +5,17 @@ import { Paper, Grid, Button, CssBaseline } from "@material-ui/core";
 import ItemAddableField from "../components/ItemAddableField";
 import { FlashOnOutlined } from "@material-ui/icons";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function SummaryForm({ authorData, bookInfo }) {
+  const history = useHistory();
+
   const sendPost = async (values) => {
     axios
       .post("https://biozetapi.herokuapp.com/summary", values, {})
       .then((response) => {
         console.log(response);
+        history.push("/ozet/" + response.data.result.data.summary_id);
       })
       .catch((err) => console.error(err));
   };
