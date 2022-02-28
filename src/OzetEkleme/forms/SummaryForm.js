@@ -2,14 +2,29 @@ import { Form, Field } from "react-final-form";
 import { TextField } from "final-form-material-ui";
 import arrayMutators from "final-form-arrays";
 import { Paper, Grid, Button, CssBaseline } from "@material-ui/core";
-import ItemAddableField from "./ItemAddableField";
+import ItemAddableField from "../components/ItemAddableField";
+import { FlashOnOutlined } from "@material-ui/icons";
+import axios from "axios";
 
-function SummaryForm() {
+function SummaryForm({ authorData, bookInfo }) {
+  const sendPost = async (values) => {
+    axios
+      .post("https://biozetapi.herokuapp.com/summary", values, {})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.error(err));
+  };
   const onSubmit = async (values) => {
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    await sleep(300);
-    console.log(JSON.stringify(values, 0, 2));
-    window.alert(JSON.stringify(values, 0, 2));
+    const data = {
+      book: bookInfo.isbn,
+      summary_id: bookInfo.summary_id,
+      writer_id: "not-found",
+      content: values,
+    };
+
+    sendPost(data);
+    window.alert(JSON.stringify(data, 0, 2));
   };
 
   const validate = (values) => {
@@ -27,7 +42,7 @@ function SummaryForm() {
         mutators={{
           ...arrayMutators,
         }}
-        initialValues={{ ISBN: "93", authorId: "1093" }}
+        initialValues={{}}
         validate={validate}
         render={({
           handleSubmit,
@@ -42,52 +57,19 @@ function SummaryForm() {
           <form onSubmit={handleSubmit} noValidate>
             <Paper style={{ padding: 16 }}>
               <Grid container alignItems="flex-start" spacing={2}>
-                <Grid item xs={6}>
-                  <Field
-                    fullWidth
-                    required
-                    name="bookName"
-                    component={TextField}
-                    type="text"
-                    label="Kitap Adı"
-                    disabled={true}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Field
-                    fullWidth
-                    required
-                    name="authorName"
-                    component={TextField}
-                    type="text"
-                    label="Yazar Adı"
-                    disabled={true}
-                  />
-                </Grid>
+                <GridTextField
+                  name="structure"
+                  label="Yapı"
+                  fullWidth={true}
+                  multiline={true}
+                />
 
-                <Grid item xs={12}>
-                  <Field
-                    fullWidth
-                    required
-                    multiline
-                    name="structure"
-                    component={TextField}
-                    type="text"
-                    label="Yapı"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Field
-                    fullWidth
-                    required
-                    multiline
-                    name="topic"
-                    component={TextField}
-                    type="text"
-                    label="Konu"
-                  />
-                </Grid>
+                <GridTextField
+                  name="topic"
+                  label="Konu"
+                  fullWidth={true}
+                  multiline={true}
+                />
 
                 <ItemAddableField
                   buttonText="Soru Ekle"
@@ -128,6 +110,29 @@ function SummaryForm() {
         )}
       />
     </div>
+  );
+}
+
+function GridTextField({
+  name,
+  label,
+  fullWidth = false,
+  disabled = false,
+  multiline = false,
+}) {
+  return (
+    <Grid item xs={12}>
+      <Field
+        fullWidth={fullWidth}
+        multiline={multiline}
+        required
+        name={name}
+        component={TextField}
+        type="text"
+        label={label}
+        disabled={disabled}
+      />
+    </Grid>
   );
 }
 

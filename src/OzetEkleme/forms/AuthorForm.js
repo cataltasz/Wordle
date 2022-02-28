@@ -4,7 +4,7 @@ import { TextField } from "final-form-material-ui";
 import { Paper, Grid, Button, CssBaseline } from "@material-ui/core";
 import axios from "axios";
 import arrayMutators from "final-form-arrays";
-import ItemAddableField from "./ItemAddableField";
+import ItemAddableField from "../components/ItemAddableField";
 
 let catUrl = "https://biozetapi.herokuapp.com/category?sort=category_id&asc";
 
@@ -20,8 +20,9 @@ const confCatData = (setter, response) => {
   );
 };
 
-function BookForm() {
+function AuthorForm({ authorId, setFormState, setAuthorData }) {
   const [categories, setCat] = useState([]);
+
   useEffect(() => {
     axios
       .get(catUrl)
@@ -32,30 +33,44 @@ function BookForm() {
         console.log(ex);
       });
   }, []);
+
+  const sendPost = async (values) => {
+    axios
+      .post("https://biozetapi.herokuapp.com/author", values, {})
+      .then((response) => {
+        console.log(response);
+        setFormState(2);
+        setAuthorData(response.data.result.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
   const onSubmit = async (values) => {
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    await sleep(300);
-    console.log(JSON.stringify(values, 0, 2));
+    await sendPost(values);
     window.alert(JSON.stringify(values, 0, 2));
   };
 
   const validate = (values) => {
+    console.log(values);
     const errors = {};
-    if (!values.bookName) {
-      errors.bookName = "Boş bırakılamaz!";
-    } else if (values.bookName.trim().length < 3) {
-      errors.bookName = "Böyle Olmaz!";
+    if (!values.name) {
+      errors.name = "Boş bırakılamaz!";
+    } else if (values.name.trim().length < 3) {
+      errors.name = "Böyle Olmaz!";
     }
 
     var expression =
       /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
     var regex = new RegExp(expression);
-    if (!values.cover_img) errors.cover_img = "Boş bırakılamaz! ";
-    else if (!values.cover_img.match(regex)) errors.cover_img = "format yanlış";
-    /*if (catArr.length < 1)
-      errors.category = "Çok az kategori (+ butonuna basmayı unutma!)";
-    else if (catArr.length > 4)
-      errors.category = "Çok fazla kategori (yeniden dene)";*/
+    if (!values.image_url) errors.image_url = "Boş bırakılamaz! ";
+    else if (!values.image_url.match(regex)) errors.image_url = "format yanlış";
+    if (values.categories) {
+      if (values.categories.length < 1) errors.categories = "Çok az kategori";
+      else if (values.categories.length > 4)
+        errors.categories = "Çok fazla kategori (yeniden dene)";
+    } else {
+      errors.categories = "Çok az kategori ";
+    }
 
     return errors;
   };
@@ -69,7 +84,7 @@ function BookForm() {
         mutators={{
           ...arrayMutators,
         }}
-        initialValues={{ ISBN: "93", authorId: "1093" }}
+        initialValues={{ olid: authorId, dev: true }}
         validate={validate}
         render={({
           handleSubmit,
@@ -88,18 +103,7 @@ function BookForm() {
                   <Field
                     fullWidth
                     required
-                    name="ISBN"
-                    component={TextField}
-                    type="text"
-                    label="ISBN"
-                    disabled={true}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Field
-                    fullWidth
-                    required
-                    name="authorId"
+                    name="olid"
                     component={TextField}
                     type="text"
                     label="Yazar ID"
@@ -111,23 +115,32 @@ function BookForm() {
                   <Field
                     fullWidth
                     required
-                    name="bookName"
+                    name="name"
                     component={TextField}
                     type="text"
-                    label="Kitap Adı"
+                    label="Yazar Adı"
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <Field
-                    name="cover_img"
+                    name="image_url"
                     fullWidth
                     required
                     component={TextField}
                     type="url"
-                    label="Kitap Kapak Görseli URL"
+                    label="Yazar Görseli URL"
                   />
                 </Grid>
-
+                <Grid item xs={12}>
+                  <Field
+                    name="wikipedia_url"
+                    fullWidth
+                    required
+                    component={TextField}
+                    type="url"
+                    label="Wikipedia URL"
+                  />
+                </Grid>
                 <ItemAddableField
                   buttonText="Kategori Ekle"
                   id="categories"
@@ -143,7 +156,7 @@ function BookForm() {
                     type="submit"
                     disabled={submitting}
                   >
-                    Submit
+                    Ekle
                   </Button>
                 </Grid>
               </Grid>
@@ -156,4 +169,4 @@ function BookForm() {
   );
 }
 
-export default BookForm;
+export default AuthorForm;
