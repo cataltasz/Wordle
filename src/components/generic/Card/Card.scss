@@ -38,13 +38,13 @@
 }
 
 .card-info {
+  backface-visibility: hidden;
+
   display: flex;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(5px);
-  background-color: #00a9;
+  background-color: rgba(16, 65, 191, 0.686);
   border-radius: 10px;
-  position: absolute;
   top: 0;
   left: 0;
   color: $backgroundDark;
