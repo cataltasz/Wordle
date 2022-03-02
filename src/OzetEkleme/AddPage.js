@@ -19,30 +19,38 @@ export default function AddPage() {
 
   const [bookInfo, setBookInfo] = useState(null);
 
-  const getBookInfo = (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const getAuthorInfo = (key) => {
+    axios
+      .get("https://openlibrary.org" + key + ".json", {
+        timeout: 50000,
+      })
+      .then((res) => {
+        setAuthorData({ name: res.data.name });
+      })
+      .catch((ex) => console.log(ex));
+  };
+
+  const getOpenAPIResult = () => {
     axios
       .get("https://openlibrary.org/isbn/" + ISBN + ".json", { timeout: 50000 })
       .then((response) => {
         setBookInfo({ name: response.data.title, isbn: ISBN });
         setAuthorId(response.data.authors[0].key);
-        setCover("https://covers.openlibrary.org/b/isbn/" + ISBN + "-S.jpg");
+        setFormState(1);
 
-        axios
-          .get(
-            "https://openlibrary.org" + response.data.authors[0].key + ".json",
-            {
-              timeout: 50000,
-            }
-          )
-          .then((res) => {
-            setAuthorData({ name: res.data.name });
-          })
-          .catch((ex) => console.log(ex));
+        setCover("https://covers.openlibrary.org/b/isbn/" + ISBN + "-S.jpg");
+        getAuthorInfo(response.data.authors[0].key);
         setLoading(false);
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => {
+        console.log(ex);
+        setLoading(false);
+      });
+  };
+
+  const getBookInfo = (e) => {
+    e.preventDefault();
+    setLoading(true);
 
     axios
       .get("https://biozetapi.herokuapp.com/book?isbn=" + ISBN)
@@ -52,9 +60,11 @@ export default function AddPage() {
           setAuthorData({ name: res.data.result.author[0].name });
           setFormState(3);
         }
+
+        setLoading(false);
       })
       .catch(() => {
-        setFormState(1);
+        getOpenAPIResult();
       });
   };
 

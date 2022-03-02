@@ -21,14 +21,14 @@ export default function HomePage() {
         <div className="ThumbnailOverlay"></div>
         <Fade>
           <div className="ThumbnailOver">
-            <h1>{homeConstants.BRAND_NAME}</h1>
             <h3>{homeConstants.SHORT_DESC}</h3>
+            <h1>{homeConstants.BRAND_NAME}</h1>
             <span>{homeConstants.LONG_DESC}</span>
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
-                marginTop: "10px",
+                margin: "30px 0",
               }}
             >
               <Link to="/giris" className="SignupBtnHome">
