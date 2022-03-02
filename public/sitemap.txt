@@ -1,0 +1,4 @@
+https://biozet.herokuapp.com/
+https://biozet.herokuapp.com/kesfet
+https://biozet.herokuapp.com/kategoriler
+https://biozet.herokuapp.com/ozet-ekle
