@@ -1,5 +1,6 @@
 import Loader from "react-loader-spinner";
 import Fade from "react-reveal/Fade";
+import "./Loading.scss";
 
 const style = {
   position: "fixed",
@@ -11,9 +12,27 @@ const style = {
   display: "flex",
   flexDirection: "row",
   justifyContent: "center",
-  alignItems: "center"
+  alignItems: "center",
 };
-export default function Loading() {
+
+const styleImg = {
+  backgroundImage: "url('icon.ico')",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  width: "150px",
+  height: "150px",
+};
+
+export default function LoadingImg() {
+  return (
+    <Fade>
+      <div style={style}>
+        <div className="blink-image" style={styleImg}></div>
+      </div>
+    </Fade>
+  );
+}
+export function Loading() {
   return (
     <Fade>
       <div className="loaderContainer" style={style}>
